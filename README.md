@@ -23,7 +23,7 @@ python src/cnn.py --test
 
 
 ### TODO
-- [] add REST interface for making request
-- [] better accuracy
-- [] try different algorithm from keras
-- [] try LSTM model for Image classification
+- [ ] add REST interface for making request
+- [ ] better accuracy
+- [ ] try different algorithm from keras
+- [ ] try LSTM model for Image classification
