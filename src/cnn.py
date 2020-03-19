@@ -16,8 +16,10 @@ import click as click
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
+from keras.layers import Conv2D, Dense, Flatten, MaxPooling2D
+from keras.models import Sequential
 from keras.preprocessing import image
-from tensorflow.keras import datasets, layers, models
+from tensorflow.keras import datasets
 
 from src.logger import LOGGER
 
@@ -27,8 +29,11 @@ LOGGER.critical(f'Tensorflow Version: {tf.version.VERSION}')
 class ImageRecognitionCNN:
 
     def __init__(self):
-        """ Initialise the CNN """
-        self.model = models.Sequential()
+        """ Initialise the CNN
+
+        - Sequential: for initializing the artificial neural network
+        """
+        self.model = Sequential()
         self.data_dir = Path(__file__).parent.resolve().joinpath('dataset')
         self.train_images = None
         self.train_labels = None
@@ -43,31 +48,40 @@ class ImageRecognitionCNN:
         self.train_images, self.test_images = self.train_images / 255.0, self.test_images / 255.0
 
     def build(self):
-        """Build the convolution"""
+        """Build the convolution
+
+        Layers:
+        - Convolution2D: for implementing the convolution network that works with images
+        - MaxPooling2D: for adding the pooling layers
+        - Flatten: for converting pooled feature maps into one column,
+                   that will be fed to the fully connected layer
+        - Dense: that will add a fully connected layer to the neural network
+        """
         LOGGER.info('32 filters or a 3x3 grid')
-        first_layer = layers.Conv2D(filters=32,
-                                    kernel_size=(3, 3),
-                                    input_shape=(32, 32, 3),
-                                    activation='relu')
+        first_layer = Conv2D(filters=32,
+                             kernel_size=(3, 3),
+                             input_shape=(32, 32, 3),
+                             activation='relu')
         self.model.add(first_layer)
-        self.model.add(layers.MaxPooling2D(pool_size=(2, 2)))
+        self.model.add(MaxPooling2D(pool_size=(2, 2)))
         LOGGER.info('Second layer')
-        self.model.add(layers.Conv2D(filters=64, kernel_size=(3, 3), activation="relu"))
-        self.model.add(layers.MaxPooling2D(pool_size=(2, 2)))
+        self.model.add(Conv2D(filters=64, kernel_size=(3, 3), activation="relu"))
+        self.model.add(MaxPooling2D(pool_size=(2, 2)))
         LOGGER.info('Third layer')
-        self.model.add(layers.Conv2D(filters=64, kernel_size=(3, 3), activation="relu"))
+        self.model.add(Conv2D(filters=64, kernel_size=(3, 3), activation="relu"))
         LOGGER.info('3 - Flattening')
-        self.model.add(layers.Flatten())
+        self.model.add(Flatten())
         LOGGER.info('4 - Full Connection, making an ANN')
-        self.model.add(layers.Dense(activation="relu", units=64))
+        self.model.add(Dense(activation="relu", units=64))
         LOGGER.info('Binary outcome so sigmoid is being used')
-        self.model.add(layers.Dense(activation="sigmoid", units=10))
+        self.model.add(Dense(activation="sigmoid", units=10))
         self.model.summary()
 
     def compile(self):
         """Compiling the NN"""
         self.model.compile(optimizer='adam',
                            loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+                           # loss='binary_crossentropy',
                            metrics=['accuracy'])
 
     def train(self, epoch=50):
@@ -114,8 +128,7 @@ class ImageRecognitionCNN:
 
     def load_model(self, model_file_path=None):
         if not model_file_path:
-            model_file_path = Path(__file__).parent.parent.resolve().joinpath('models',
-                                                                             'my_model.h5')
+            model_file_path = Path(__file__).parent.resolve().joinpath('models', 'my_model.h5')
             assert model_file_path.exists() is True
         self.model = tf.keras.models.load_model(str(model_file_path))
         # self.model.summary()
@@ -148,7 +161,7 @@ def main(build, test):
         # p.verify_data()
         p.build()
         p.compile()
-        p.train(epoch=50)
+        p.train(epoch=2)
         p.evaluate()
         p.save_model()
     if test:
