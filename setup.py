@@ -18,5 +18,5 @@ setup(
     packages=['cnn-image-recog'],
     package_dir={"cnn-image-recog": "src"},
     package_data={},
-    install_requires=['colorlog', 'keras==2.3.1', 'matplotlib', 'tensorflow==2.1.0', 'click'],
+    install_requires=['colorlog', 'keras==2.3.1', 'matplotlib', 'tensorflow==2.1.0', 'click', 'pillow'],
 )
