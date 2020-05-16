@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from pathlib import Path
+from setuptools import find_packages, setup
 
 readme = 'CNN model for Image Classification'
+
+all_reqs = (Path(__file__).parent.joinpath('requirements.txt').read_text().splitlines())
+install_requires = [x.strip() for x in all_reqs if 'git+' not in x]
+dependency_links = [x.strip().replace('git+', '') for x in all_reqs if x.startswith('git+')]
+tests_require = ['pytest']
 
 setup(
     long_description=readme,
@@ -15,8 +18,7 @@ setup(
     python_requires='==3.*,>=3.6.0',
     author='Amit Bakhru',
     author_email='bakhru@me.com',
-    packages=['cnn-image-recog'],
-    package_dir={"cnn-image-recog": "src"},
-    package_data={},
-    install_requires=['colorlog', 'keras==2.3.1', 'matplotlib', 'tensorflow==2.1.0', 'click', 'pillow'],
+    packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
+    install_requires=install_requires,
+    dependency_links=dependency_links,
 )
