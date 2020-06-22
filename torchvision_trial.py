@@ -13,7 +13,7 @@ from pathlib import Path
 
 import torch
 from PIL import Image
-from awesome_color_logger import LOGGER
+from src.logger import LOGGER
 from parameterized import parameterized
 from torchvision import models
 from torchvision.transforms import transforms
