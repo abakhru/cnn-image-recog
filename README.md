@@ -6,7 +6,7 @@ it can give an accurate prediction of what the object in the image is.
 
 - create venv
 ```
-python3.6 -m pip install -U pip setuptools poetry
+python3.6 -m pip install -U pip setuptools wheel
 python3.6 -m venv env
 . env/bin/activate
 pip install -e .

@@ -53,3 +53,4 @@ sftp-config.json
 .settings/
 *.lock
 pip_versions.txt
+o/
