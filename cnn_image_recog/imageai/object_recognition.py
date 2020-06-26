@@ -21,8 +21,8 @@ import timeit
 
 from imageai.Detection import ObjectDetection
 
-from src.imageai import ImageAIBase
-from src.logger import LOGGER
+from cnn_image_recog.imageai import ImageAIBase
+from cnn_image_recog.logger import LOGGER
 
 
 class ObjectRecognition(ImageAIBase):
