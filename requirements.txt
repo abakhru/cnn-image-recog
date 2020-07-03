@@ -13,3 +13,4 @@ requests
 pytest
 coverage
 bandit
+safety
