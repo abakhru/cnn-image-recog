@@ -10,3 +10,7 @@ parameterized
 torch
 torchvision
 requests
+pytest
+coverage
+bandit
+safety

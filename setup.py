@@ -1,24 +1,34 @@
 #!/usr/bin/env python
 
+"""The setup script."""
+
 from pathlib import Path
-from setuptools import find_packages, setup
+from setuptools import setup, find_packages
 
-readme = 'CNN model for Image Classification'
-
-all_reqs = (Path(__file__).parent.joinpath('requirements.txt').read_text().splitlines())
-install_requires = [x.strip() for x in all_reqs if 'git+' not in x]
-dependency_links = [x.strip().replace('git+', '') for x in all_reqs if x.startswith('git+')]
-tests_require = ['pytest']
-
-setup(
-    long_description=readme,
-    name='cnn-image-recog',
-    version='0.1.0',
-    description='CNN model for image recognition',
-    python_requires='==3.*,>=3.6.0',
-    author='Amit Bakhru',
-    author_email='bakhru@me.com',
-    packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
-    install_requires=install_requires,
-    dependency_links=dependency_links,
-)
+setup(author="Amit Bakhru",
+      author_email='bakhru@me.com',
+      python_requires='>=3.5',
+      classifiers=[
+          'Development Status :: 2 - Pre-Alpha',
+          'Intended Audience :: Developers',
+          'License :: OSI Approved :: MIT License',
+          'Natural Language :: English',
+          'Programming Language :: Python :: 3',
+          'Programming Language :: Python :: 3.5',
+          'Programming Language :: Python :: 3.6',
+          'Programming Language :: Python :: 3.7',
+          'Programming Language :: Python :: 3.8',
+          ],
+      description="CNN model for Image Classification",
+      install_requires=Path('requirements.txt').read_text().split('\n'),
+      license="MIT license",
+      long_description=Path('README.md').read_text(),
+      include_package_data=True,
+      keywords='cnn_image_recog',
+      name='cnn_image_recog',
+      packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
+      test_suite='tests',
+      url='https://github.com/abakhru/cnn_image_recog',
+      version='0.1.0',
+      zip_safe=False,
+      )
