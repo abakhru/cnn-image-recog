@@ -27,3 +27,4 @@ python src/cnn.py --test
 - [ ] better accuracy
 - [ ] try different algorithm from keras
 - [ ] try LSTM model for Image classification
+- [ ] https://twitter.com/PawlowskiMario/status/1280763278722023426?s=20
