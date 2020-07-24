@@ -15,3 +15,5 @@ coverage
 bandit
 safety
 dlib
+easyocr
+gradio
