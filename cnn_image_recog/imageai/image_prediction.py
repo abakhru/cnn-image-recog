@@ -4,15 +4,15 @@ import os
 import threading
 import timeit
 from multiprocessing.pool import ThreadPool
-from pathlib import Path
 
 from imageai.Prediction import ImagePrediction
 
-from cnn_image_recog.imageai import ImageAIBase, download_save_model
+from cnn_image_recog import DATA_DIR
+from cnn_image_recog.imageai import ImageAIBase
 from cnn_image_recog.logger import LOGGER
 
 PREDICTION = None
-all_images_array = list(Path(__file__).parent.resolve().parent.joinpath('data').glob('*.jpg'))
+all_images_array = list(DATA_DIR.glob('*.jpg'))
 
 
 class ImagePredictionExp(ImageAIBase):

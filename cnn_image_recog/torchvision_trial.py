@@ -9,7 +9,6 @@ References:
 """
 import json
 import logging
-from pathlib import Path
 
 import requests
 import torch
@@ -17,6 +16,7 @@ from PIL import Image
 from torchvision import models
 from torchvision.transforms import transforms
 
+from cnn_image_recog import DATA_DIR
 from cnn_image_recog.logger import LOGGER
 
 logging.getLogger('urllib3').setLevel('ERROR')
@@ -48,7 +48,7 @@ class TorchVisionImgClassification:
 
     @staticmethod
     def load_labels():
-        imagenet_labels = Path('imagenet_classes.txt')
+        imagenet_labels = DATA_DIR / 'imagenet_classes.txt'
         if not imagenet_labels.exists():
             res = requests.get('https://raw.githubusercontent.com/Lasagne/Recipes/master/'
                                'examples/resnet50/imagenet_classes.txt')

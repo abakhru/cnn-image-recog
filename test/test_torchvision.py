@@ -1,9 +1,9 @@
-from pathlib import Path
 from unittest import TestCase
 
 import requests
 from parameterized import parameterized
 
+from cnn_image_recog import DATA_DIR
 from cnn_image_recog.logger import LOGGER
 from cnn_image_recog.torchvision_trial import TorchVisionImgClassification
 
@@ -12,7 +12,7 @@ class TestTorchVisionImage(TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.data_dir = Path(__file__).parent.parent.resolve().joinpath('data')
+        cls.data_dir = DATA_DIR
         cls.get_testdata()
         cls.p = TorchVisionImgClassification()
 
