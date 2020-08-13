@@ -18,3 +18,4 @@ dlib
 easyocr
 gradio
 jupyterlab
+pandas

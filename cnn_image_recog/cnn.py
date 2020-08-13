@@ -29,6 +29,7 @@ from cnn_image_recog.logger import LOGGER
 
 LOGGER.critical(f'Tensorflow Version: {tf.version.VERSION}')
 LOGGER.setLevel('DEBUG')
+pyplot.style.use('fivethirtyeight')
 
 
 class ImageRecognitionCNN(ImageAIBase):
