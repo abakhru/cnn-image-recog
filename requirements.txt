@@ -7,8 +7,8 @@ opencv-python
 pillow
 tensorflow==1.15.2
 parameterized
-torch
-torchvision
+torch==1.6.0
+torchvision==0.7.0
 requests
 pytest
 coverage
@@ -17,3 +17,5 @@ safety
 dlib
 easyocr
 gradio
+jupyterlab
+pandas

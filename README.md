@@ -6,10 +6,7 @@ it can give an accurate prediction of what the object in the image is.
 
 - create venv
 ```
-python3.6 -m venv env
-. env/bin/activate
-pip install -U pip setuptools wheel
-pip install -e .
+quick_start.sh
 ```
 - build the model
 ```

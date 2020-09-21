@@ -9,21 +9,29 @@ References:
 """
 import json
 import logging
-from pathlib import Path
 
+import requests
 import torch
 from PIL import Image
-from src.logger import LOGGER
-from parameterized import parameterized
 from torchvision import models
 from torchvision.transforms import transforms
+
+from cnn_image_recog import DATA_DIR
+from cnn_image_recog.logger import LOGGER
 
 logging.getLogger('urllib3').setLevel('ERROR')
 logging.getLogger('PIL').setLevel('ERROR')
 LOGGER.setLevel('INFO')
+torch.manual_seed(111)
+device = ""
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+else:
+    device = torch.device("cpu")
 
 
 class TorchVisionImgClassification:
+
     def __init__(self):
         LOGGER.debug(f'All models: {json.dumps(dir(models), indent=2, sort_keys=True)}')
         self.transform = transforms.Compose([
@@ -40,8 +48,12 @@ class TorchVisionImgClassification:
 
     @staticmethod
     def load_labels():
-        with open('imagenet_classes.txt') as f:
-            labels = [line.strip() for line in f.readlines()]
+        imagenet_labels = DATA_DIR / 'imagenet_classes.txt'
+        if not imagenet_labels.exists():
+            res = requests.get('https://raw.githubusercontent.com/Lasagne/Recipes/master/'
+                               'examples/resnet50/imagenet_classes.txt')
+            imagenet_labels.write_text(res.text)
+        labels = imagenet_labels.read_text().splitlines()
         return labels
 
     def alexnet(self):
@@ -74,23 +86,3 @@ class TorchVisionImgClassification:
         _, indices = torch.sort(out, descending=True)
         percentage = torch.nn.functional.softmax(out, dim=1)[0] * 100
         LOGGER.info([(self.labels[idx], percentage[idx].item()) for idx in indices[0][:5]])
-
-
-p = TorchVisionImgClassification()
-
-
-@parameterized.expand(
-        [('dog.jpg', Path('data/dog.jpg'), 'Labrador retriever'),
-         ('dog.jpeg', Path('data/dog.jpeg'), 'Labrador retriever'),
-         ('cat.jpg', Path('data/cat.jpg'), 'tabby, tabby cat'),
-         ('cat_2.jpg', Path('data/cat_2.jpg'), 'tabby, tabby cat'),
-         ('rooster.jpg', Path('data/rooster.jpg'), 'maypole'),
-         ('iron_chic.jpg', Path('data/iron_chic.jpg'), 'maraca')]
-        # [(i.name, i, 'abc') for i in list(Path().cwd().joinpath('data').rglob('*'))]
-        )
-def test_images(image_name, image_path, expected):
-    LOGGER.debug(f'Running image classification test for "{image_name}" file')
-    assert image_path.exists() is True, f'{image_path} file not found'
-    classification, confidence = p.load_img(image_path, expected)
-    assert classification == expected, (f'"{expected}" classification does not match with actual "'
-                                        f'{classification} classification')

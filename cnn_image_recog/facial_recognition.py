@@ -14,18 +14,17 @@ Lips Points = 61–67
 - https://github.com/italojs/facial-landmarks-recognition/blob/master/shape_predictor_68_face_landmarks.dat
 """
 
-from pathlib import Path
-
 import cv2
 import dlib
 
+from cnn_image_recog import DATA_DIR
 from cnn_image_recog.logger import LOGGER
 
 
 class FacialRecognitionExperiments:
-    
+
     def __init__(self):
-        self.data_dir = Path(__file__).parent.parent.resolve().joinpath('data')
+        self.data_dir = DATA_DIR
         LOGGER.debug('Load the detector')
         self.detector = dlib.get_frontal_face_detector()
         LOGGER.info('Load the predictor')
