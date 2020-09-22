@@ -8,7 +8,7 @@ LOGGER = logging.getLogger(__name__)
 
 LOG_FORMAT = ('%(asctime)s '
               '%(log_color)s'
-              '%(process)d %(name)s %(levelname)s | %(pathname)s:%(lineno)s | '
+              '%(process)d %(levelname)s | %(pathname)s:%(lineno)s | '
               '%(reset)s'
               '%(log_color)s%(message)s%(reset)s')
 V_LEVELS = {0: logging.ERROR, 1: logging.WARNING, 2: logging.INFO, 3: logging.DEBUG}
