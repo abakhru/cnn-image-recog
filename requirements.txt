@@ -5,7 +5,7 @@ keras==2.3.1
 matplotlib
 opencv-python
 pillow
-tensorflow==2.4.0
+tensorflow==2.5.0
 parameterized
 torch==1.6.0
 torchvision==0.7.0
