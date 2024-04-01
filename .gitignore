@@ -51,7 +51,6 @@ sftp-config.json
 .classpath
 .project
 .settings/
-*.lock
 pip_versions.txt
 o/
 models/
