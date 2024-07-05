@@ -14,3 +14,12 @@ venv:
 	${VENV_DIR}/bin/poetry export -f requirements.txt --output requirements.txt
 	uv pip install -r ./requirements.txt
 	rm ./requirements.txt
+	uv pip install -e .
+
+## build the model
+build:
+	${VENV_DIR}/bin/python cnn_image_recog/cnn.py --build
+
+## test the model
+test:
+	${VENV_DIR}/bin/python cnn_image_recog/cnn.py --test

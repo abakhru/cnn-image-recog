@@ -27,6 +27,7 @@ opencv-python = "*"
 matplotlib = "*"
 parameterized = "*"
 tensorflow = "^2.16.2"
+keras-preprocessing = "*"
 
 
 [build-system]

@@ -6,15 +6,15 @@ it can give an accurate prediction of what the object in the image is.
 
 - create venv
 ```
-quick_start.sh
+make venv
 ```
 - build the model
 ```
-python src/cnn.py --build
+make build
 ```
 - test the model
 ```
-python src/cnn.py --test
+make test
 ```
 - if on mac, you may need to `brew install tcl-tk` or `sudo apt-get install python3-tk` on ubuntu
 
