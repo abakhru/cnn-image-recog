@@ -11,10 +11,8 @@ help:
 venv:
 	uv venv --python 3.12
 	uv pip install pip setuptools wheel poetry
-	${VENV_DIR}/bin/poetry export -f requirements.txt --output requirements.txt
-	uv pip install -r ./requirements.txt
-	rm ./requirements.txt
-	uv pip install -e .
+	${VENV_DIR}/bin/poetry install
+	${VENV_DIR}/bin/poetry update
 
 ## build the model
 build:
