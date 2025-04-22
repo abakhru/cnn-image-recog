@@ -9,10 +9,9 @@ help:
 
 ## build the python virtual env for the project
 venv:
-	uv venv --python 3.12
-	uv pip install pip setuptools wheel poetry
-	${VENV_DIR}/bin/poetry install
-	${VENV_DIR}/bin/poetry update
+	uv lock
+	uv sync
+	uv lock -U
 
 ## build the model
 build:

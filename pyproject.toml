@@ -1,35 +1,37 @@
-[tool.poetry]
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[project]
+authors = [
+    {name = "amit", email = "bakhru@me.com"},
+]
+requires-python = "<4.0,>=3.12"
+dependencies = [
+    "click",
+    "colorlog",
+    "imageai",
+    "pandas",
+    "torchvision",
+    "keras",
+    "jupyterlab",
+    "gradio",
+    "easyocr",
+    "dlib",
+    "safety",
+    "bandit",
+    "coverage",
+    "pytest",
+    "requests",
+    "pillow",
+    "opencv-python",
+    "matplotlib",
+    "parameterized",
+    "tensorflow<3.0.0,>=2.16.2",
+    "keras-preprocessing",
+]
 name = "cnn-image-recog"
 version = "0.1.0"
 description = "CNN Image Recognition Experiments"
-authors = ["amit <bakhru@me.com>"]
 readme = "README.md"
-
-[tool.poetry.dependencies]
-python = "^3.12"
-click = "*"
-colorlog = "*"
-imageai = "*"
-pandas = "*"
-torchvision = "*"
-keras = "*"
-jupyterlab = "*"
-gradio = "*"
-easyocr = "*"
-dlib = "*"
-safety = "*"
-bandit = "*"
-coverage = "*"
-pytest = "*"
-requests = "*"
-pillow = "*"
-opencv-python = "*"
-matplotlib = "*"
-parameterized = "*"
-tensorflow = "^2.16.2"
-keras-preprocessing = "*"
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
